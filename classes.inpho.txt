@@ -1,0 +1,528 @@
+class(i715).
+class(i1785).
+isa(i1785, i923).
+class(i923).
+isa(i923, i715).
+class(i1209).
+isa(i1209, i915).
+class(i737).
+isa(i737, i923).
+class(i961).
+isa(i961, i923).
+class(i2080).
+isa(i2080, i2078).
+class(i958).
+isa(i958, i957).
+class(i959).
+isa(i959, i957).
+class(i960).
+isa(i960, i957).
+class(i925).
+isa(i925, i715).
+class(i2163).
+isa(i2163, i925).
+class(i944).
+isa(i944, i925).
+class(i927).
+isa(i927, i925).
+class(i897).
+isa(i897, i715).
+class(i226).
+isa(i226, i819).
+class(i168).
+isa(i168, i819).
+class(i819).
+isa(i819, i897).
+class(i889).
+isa(i889, i897).
+class(i895).
+isa(i895, i897).
+class(i890).
+isa(i890, i715).
+class(i936).
+isa(i936, i890).
+class(i938).
+isa(i938, i890).
+class(i809).
+isa(i809, i890).
+class(i893).
+isa(i893, i890).
+class(i894).
+isa(i894, i890).
+class(i720).
+isa(i720, i715).
+class(i1784).
+isa(i1784, i720).
+class(i891).
+isa(i891, i720).
+class(i892).
+isa(i892, i720).
+class(i749).
+isa(i749, i897).
+class(i992).
+isa(i992, i897).
+class(i726).
+isa(i726, i819).
+class(i909).
+isa(i909, i897).
+class(i1325).
+isa(i1325, i925).
+class(i1826).
+class(i1833).
+isa(i1833, i704).
+class(i1125).
+isa(i1125, i704).
+class(i1832).
+isa(i1832, i704).
+class(i1831).
+isa(i1831, i719).
+class(i1523).
+isa(i1523, i719).
+class(i968).
+isa(i968, i719).
+class(i967).
+isa(i967, i719).
+class(i723).
+isa(i723, i719).
+class(i1158).
+isa(i1158, i719).
+class(i931).
+isa(i931, i719).
+class(i1830).
+isa(i1830, i722).
+class(i1829).
+isa(i1829, i722).
+class(i712).
+class(i804).
+isa(i804, i712).
+class(i805).
+isa(i805, i712).
+class(i807).
+isa(i807, i712).
+class(i840).
+isa(i840, i712).
+class(i934).
+isa(i934, i1825).
+class(i835).
+isa(i835, i840).
+class(i836).
+isa(i836, i840).
+class(i837).
+isa(i837, i840).
+class(i1709).
+isa(i1709, i840).
+class(i828).
+isa(i828, i1825).
+class(i1789).
+class(i647).
+class(i1787).
+class(i674).
+class(i920).
+class(i1788).
+class(i682).
+isa(i682, i647).
+class(i619).
+isa(i619, i647).
+class(i918).
+isa(i918, i647).
+class(i911).
+isa(i911, i647).
+class(i621).
+isa(i621, i619).
+class(i916).
+isa(i916, i619).
+class(i896).
+isa(i896, i619).
+class(i917).
+isa(i917, i674).
+class(i1790).
+isa(i1790, i674).
+class(i940).
+isa(i940, i674).
+class(i941).
+isa(i941, i674).
+class(i914).
+isa(i914, i674).
+class(i915).
+isa(i915, i674).
+class(i1791).
+isa(i1791, i674).
+class(i614).
+isa(i614, i1788).
+class(i702).
+isa(i702, i1788).
+class(i866).
+isa(i866, i682).
+class(i854).
+isa(i854, i614).
+class(i898).
+isa(i898, i682).
+class(i858).
+isa(i858, i614).
+class(i859).
+isa(i859, i614).
+class(i187).
+isa(i187, i702).
+class(i843).
+isa(i843, i702).
+class(i844).
+isa(i844, i702).
+class(i845).
+isa(i845, i702).
+class(i849).
+isa(i849, i702).
+class(i850).
+isa(i850, i702).
+class(i851).
+isa(i851, i702).
+class(i1795).
+isa(i1795, i843).
+class(i842).
+isa(i842, i920).
+class(i1796).
+isa(i1796, i920).
+class(i867).
+isa(i867, i682).
+class(i1794).
+isa(i1794, i1787).
+class(i1797).
+isa(i1797, i1787).
+class(i1798).
+isa(i1798, i1787).
+class(i1799).
+isa(i1799, i1797).
+class(i1134).
+isa(i1134, i1798).
+class(i1800).
+isa(i1800, i1798).
+class(i1038).
+isa(i1038, i1798).
+class(i313).
+isa(i313, i1798).
+class(i1801).
+isa(i1801, i1787).
+class(i1802).
+isa(i1802, i1787).
+class(i1803).
+isa(i1803, i1802).
+class(i122).
+isa(i122, i1794).
+class(i801).
+isa(i801, i1794).
+class(i1828).
+isa(i1828, i722).
+class(i892).
+isa(i892, i1827).
+class(i719).
+isa(i719, i1827).
+class(i861).
+isa(i861, i1827).
+class(i906).
+isa(i906, i1827).
+class(i939).
+isa(i939, i1827).
+class(i860).
+isa(i860, i1827).
+class(i802).
+isa(i802, i1827).
+class(i903).
+isa(i903, i1827).
+class(i704).
+isa(i704, i1827).
+class(i1808).
+isa(i1808, i678).
+class(i1827).
+isa(i1827, i1826).
+class(i722).
+isa(i722, i1826).
+class(i1604).
+isa(i1604, i1789).
+class(i899).
+isa(i899, i1789).
+class(i1807).
+isa(i1807, i1789).
+class(i678).
+isa(i678, i1789).
+class(i1809).
+isa(i1809, i678).
+class(i1810).
+isa(i1810, i678).
+class(i1811).
+isa(i1811, i678).
+class(i1812).
+isa(i1812, i678).
+class(i1813).
+isa(i1813, i678).
+class(i1814).
+isa(i1814, i678).
+class(i1700).
+isa(i1700, i678).
+class(i1815).
+isa(i1815, i678).
+class(i1816).
+isa(i1816, i1813).
+class(i1483).
+isa(i1483, i1813).
+class(i1486).
+isa(i1486, i1813).
+class(i1817).
+isa(i1817, i1815).
+class(i1818).
+isa(i1818, i1815).
+class(i1819).
+isa(i1819, i1815).
+class(i1820).
+isa(i1820, i1815).
+class(i1821).
+isa(i1821, i1815).
+class(i1825).
+isa(i1825, i712).
+class(i901).
+isa(i901, i1827).
+class(i1834).
+isa(i1834, i704).
+class(i1835).
+isa(i1835, i704).
+class(i1836).
+isa(i1836, i704).
+class(i969).
+isa(i969, i1828).
+class(i1164).
+isa(i1164, i1828).
+class(i983).
+isa(i983, i1828).
+class(i1804).
+isa(i1804, i1829).
+class(i1837).
+isa(i1837, i1829).
+class(i975).
+isa(i975, i1829).
+class(i981).
+isa(i981, i1829).
+class(i1838).
+isa(i1838, i1829).
+class(i1806).
+isa(i1806, i1829).
+class(i1839).
+isa(i1839, i1830).
+class(i913).
+isa(i913, i1829).
+class(i1840).
+isa(i1840, i722).
+class(i978).
+isa(i978, i1828).
+class(i974).
+isa(i974, i1830).
+class(i980).
+isa(i980, i722).
+class(i979).
+isa(i979, i722).
+class(i1841).
+isa(i1841, i722).
+class(i1805).
+isa(i1805, i980).
+class(i1842).
+isa(i1842, i1828).
+class(i681).
+class(i969).
+isa(i969, i681).
+class(i1792).
+isa(i1792, i681).
+class(i1793).
+isa(i1793, i681).
+class(i1706).
+isa(i1706, i681).
+class(i846).
+isa(i846, i851).
+class(i1969).
+isa(i1969, i681).
+class(i1478).
+isa(i1478, i681).
+class(i1499).
+isa(i1499, i681).
+class(i2063).
+isa(i2063, i681).
+class(i1484).
+isa(i1484, i681).
+class(i847).
+isa(i847, i1499).
+class(i846).
+isa(i846, i1499).
+class(i847).
+isa(i847, i851).
+class(i2064).
+isa(i2064, i681).
+class(i978).
+isa(i978, i2063).
+class(i2065).
+isa(i2065, i2063).
+class(i2066).
+isa(i2066, i2063).
+class(i1493).
+isa(i1493, i681).
+class(i1477).
+isa(i1477, i1484).
+class(i889).
+isa(i889, i2064).
+class(i2067).
+isa(i2067, i2064).
+class(i1512).
+isa(i1512, i681).
+class(i1559).
+isa(i1559, i1478).
+class(i646).
+class(i2068).
+isa(i2068, i646).
+class(i2069).
+isa(i2069, i646).
+class(i2070).
+isa(i2070, i646).
+class(i1145).
+isa(i1145, i646).
+class(i1144).
+isa(i1144, i646).
+class(i2163).
+isa(i2163, i2068).
+class(i2071).
+isa(i2071, i2068).
+class(i2072).
+isa(i2072, i2068).
+class(i486).
+isa(i486, i2068).
+class(i130).
+isa(i130, i2068).
+class(i223).
+isa(i223, i2068).
+class(i115).
+isa(i115, i2068).
+class(i2073).
+isa(i2073, i2068).
+class(i2074).
+isa(i2074, i2068).
+class(i1143).
+isa(i1143, i2068).
+class(i2075).
+isa(i2075, i2069).
+class(i527).
+isa(i527, i2069).
+class(i880).
+isa(i880, i2070).
+class(i1758).
+isa(i1758, i2070).
+class(i2076).
+isa(i2076, i2070).
+class(i2077).
+isa(i2077, i2070).
+class(i2078).
+isa(i2078, i2070).
+class(i2079).
+isa(i2079, i2070).
+class(i775).
+isa(i775, i819).
+class(i2078).
+isa(i2078, i715).
+class(i2080).
+isa(i2080, i2078).
+class(i874).
+isa(i874, i2078).
+class(i957).
+isa(i957, i923).
+class(i2081).
+isa(i2081, i2078).
+class(i2081).
+isa(i2081, i2078).
+class(i1442).
+isa(i1442, i915).
+class(i1441).
+isa(i1441, i915).
+class(i1439).
+isa(i1439, i915).
+class(i1432).
+isa(i1432, i1791).
+class(i1293).
+isa(i1293, i1791).
+class(i675).
+isa(i675, i1791).
+class(i1594).
+isa(i1594, i1791).
+class(i1287).
+isa(i1287, i914).
+class(i1419).
+isa(i1419, i914).
+class(i1422).
+isa(i1422, i914).
+class(i1420).
+isa(i1420, i914).
+class(i1196).
+isa(i1196, i940).
+class(i2082).
+isa(i2082, i940).
+class(i912).
+isa(i912, i1790).
+class(i1337).
+isa(i1337, i1790).
+class(i624).
+class(i913).
+isa(i913, i1790).
+class(i1547).
+isa(i1547, i1790).
+class(i671).
+class(i1668).
+class(i724).
+class(i703).
+class(i1848).
+class(i713).
+class(i1652).
+class(i921).
+class(i631).
+class(i197).
+isa(i197, i631).
+class(i5359).
+isa(i5359, i631).
+class(i790).
+isa(i790, i631).
+class(i655).
+isa(i655, i631).
+class(i700).
+isa(i700, i631).
+class(i458).
+isa(i458, i631).
+class(i1077).
+isa(i1077, i197).
+class(i922).
+isa(i922, i197).
+class(i1345).
+isa(i1345, i724).
+class(i1325).
+isa(i1325, i700).
+class(i1026).
+isa(i1026, i724).
+class(i1565).
+isa(i1565, i724).
+class(i1581).
+isa(i1581, i724).
+class(i1576).
+isa(i1576, i724).
+class(i1905).
+isa(i1905, i1345).
+class(i1346).
+isa(i1346, i1345).
+class(i1575).
+isa(i1575, i1026).
+class(i2084).
+isa(i2084, i1026).
+class(i2085).
+isa(i2085, i1026).
+class(i1571).
+isa(i1571, i1026).
+class(i1558).
+isa(i1558, i724).
+class(i2086).
+isa(i2086, i713).
+class(i2087).
+isa(i2087, i713).
+class(i2088).
+isa(i2088, i713).
+class(i2089).
+isa(i2089, i713).
+class(i714).

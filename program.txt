@@ -1,0 +1,110 @@
+
+% The program is a DATALOG with (stratified) negation program
+% The "input" predicates are: (i), class, ins, ms, mg, ic, pi.
+% The "output" predicates are: ins and link.
+% The "auxiliary" predicates are: desc, ms', mg', ic', pi', pins, plink, nins, nlink.
+
+% mg is the inverse of ms, and vice versa
+mg(X, Y) :- ms(Y, X).
+ms(X, Y) :- mg(Y, X).
+
+% transitivity of ms, mg
+mg(X, Y) :- mg(X, Z), mg(Z, Y).
+%ms(X, Y) :- ms(X, Z), ms(Z, Y).
+
+% similarity symmetry
+p4(X, Y) :- p4(Y, X).
+p3(X, Y) :- p3(Y, X).
+% p2(X, Y) :- p2(Y, X).
+% p1(X, Y) :- p1(Y, X).
+% p0(X, Y) :- p0(Y, X).
+
+% incomparable/either symmetry
+ic(X, Y) :- ic(Y, X).
+
+% If there is a contradiction in the generality/specificity
+% evaluations, we set it to incomparable. Note that new instance-of
+% relations are only created between A and B if not ic(A, B).
+% This, together with the following 4 rules, resolves contradicting
+% evaluations, by dissallowing isa relations but making links possible.
+ic(X, Y) :- ms(X, Y), mg(X, Y), p4(X, Y).
+ic(X, Y) :- ms(X, Y), mg(X, Y), p3(X, Y).
+
+
+% descendant from the isa-relations only between classes
+desc(X, Y) :- isa(X, Y), class(X), class(Y).
+desc(X, Z) :- desc(X, Y), desc(Y, Z), class(X), class(Y), class(Z).
+
+
+% [POSSIBLE INS]
+% Individual X is possibly an instance of class Y if they are highly related,
+% X is more specific than Y, and they are not incomparable.
+pins(X, Y) :- p4(X, Y), ms(X, Y), class(Y), not class(X), not ic(X, Y).
+pins(X, Y) :- p3(X, Y), ms(X, Y), class(Y), not class(X), not ic(X, Y).
+
+% [NOT INS I]
+% Do not make X an instance of class Y if there is a class Z of which
+% X is possibly an instance and which is a descendant of Y.
+nins(X, Y) :- pins(X, Z), desc(Z, Y), class(Y), class(Z), not class(X).
+
+% [NOT INS II]
+% Do not make X an instance of class Y if there is evidence for a link
+% from class Y to class Z, no strong evidence against a link from class Y to class Z,
+% and X is a possible instance of class Z.
+% Note that if there is a possible link from class Y to class Z then
+% class Z is more specific and highly related to class Y but not
+% a descendant of class Y.
+%added "not nlink(Y, Z)" as test--remove if not stratified
+nins(X, Y) :- pins(X, Z), plink(Y, Z), not nlink(Y, Z),  class(Y), class(Z), not class(X).
+
+
+% [POSSIBLE LINK I] 
+% A link is possible from class X to class Y if these two classes are highly related
+% if class Y is more specific than class X, class Y is not a desendant of X, class X is
+% not a descendant of Y, and the two classes are not incomparable.
+plink(X, Y) :- p4(Y, X), ms(Y, X), not desc(Y, X), not desc(X, Y), not ic(Y, X), class(X), class(Y).
+plink(X, Y) :- p3(Y, X), ms(Y, X), not desc(Y, X), not desc(X, Y), not ic(Y, X), class(X), class(Y).
+
+% [POSSIBLE LINK II]
+% A link is possible from class X to individual Y if they are highly related,
+% incomparable, X is not a descendant of Y, and Y is not a descendant of X.
+% added check desc AND ancestor
+plink(X, Y) :- p4(X, Y), ic(X, Y), not desc(Y, X), not desc(X, Y), class(X).
+plink(X, Y) :- p3(X, Y), ic(X, Y), not desc(Y, X), not desc(X, Y), class(X).
+
+% [NOT LINK I(a)] 
+% Do not link to an instance Y of class Z if there is a possible link to Z.
+nlink(X, Y) :- plink(X, Z), ins(Y, Z), class(X), not class(Y), class(Z).
+
+% [NOT LINK I(b)]
+% Do not link from class X to an individual Y if it is an instance
+% of a descendant Z of class X.
+nlink(X, Y) :- desc(Z, X), ins(Y, Z), class(X), not class(Y), class(Z).
+
+% [NOT LINK I(c)]
+% Do not link from class X to instance Y if Y is an instance of X.
+nlink(X, Y) :- ins(Y, X), class(X), not class(Y).
+
+% [NOT LINK II(a)] 
+% Do not link from class X to a descendant Y of class Z if there is a possible
+% link from class X to Z.
+nlink(X, Y) :- plink(X, Z), desc(Y, Z), class(X), class(Y), class(Z).
+
+% [NOT LINK II(b)] 
+% Do not link from class X to a sibling Y of that class.
+nlink(X, Y) :- isa(X, Z), isa(Y, Z), class(X), class(Y), class(Z).
+
+% [NOT LINK II(c)]
+% Do not link from a class to one of its superclasses.
+nlink(X, Y) :- desc(X, Y), class(X), class(Y).
+
+% [NOT LINK II(d)]
+% Do not link from a class to one of its subclasses.
+nlink(X, Y) :- desc(Y, X), class(X), class(Y).
+
+
+% [CREATE INS]
+ins(X, Y) :- pins(X, Y), not nins(X, Y).
+
+% [CREATE LINK]
+link(X, Y) :- plink(X, Y), not nlink(X, Y).
