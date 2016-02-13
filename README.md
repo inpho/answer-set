@@ -4,7 +4,7 @@
 The Answer Set Program (ASP) requires [downloading DLV-Prolog](http://www.dlvsystem.com/dlv/), which is licensed for free academic use.
 
 ## Steps
-1.  Create a file `classes.txt` that contains the taxonomic heirarchy, or use the `classes.inpho.txt` file that contains the [InPhO seed taxonomy](http://inpho.cogs.indiana.edu/taxonomy/).
+1.  Create a file `classes.txt` that contains the taxonomic heirarchy, or use the `classes.inpho.txt` file that contains the [InPhO seed taxonomy](http://inpho.cogs.indiana.edu/taxonomy).
 2.  Create a file `evals.txt` that contains the evaluations
 3.  Run `dlv -stats -pfilter=ins,link classes.txt evals.txt program.txt 1> output.txt`
 
