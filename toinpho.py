@@ -17,15 +17,22 @@ def from_dlv(filename, load_obj=False):
 
         classes = frozenset(regex_class.findall(dlv))
         subclasses = frozenset(regex_isa.findall(dlv))
-        subclasses = dict(instances)
+        subclasses = dict(subclasses)
         instances = frozenset(regex_ins.findall(dlv))
         instances = dict(instances)
         nodes = dict()
         links = frozenset(regex_links.findall(dlv))
+        links = dict(links)
 
     # clear former ontotree table
     for node in Session.query(Node).all():
+        print "removing", node.label
         Session.delete(node)
+
+    for idea in Session.query(Idea).all():
+        print "removing instances and links from", idea.label
+        idea.instances = []
+        idea.links = []
     Session.commit()
 
     # add new classes
@@ -48,8 +55,8 @@ def from_dlv(filename, load_obj=False):
 
     # add instances
     for child, parent in instances.iteritems():
-        idea1 = Session.query(Idea).get(i1)
-        idea2 = Session.query(Idea).get(i2)
+        idea1 = Session.query(Idea).get(parent)
+        idea2 = Session.query(Idea).get(child)
         idea1.instances.append(idea2)
     Session.commit()
 
