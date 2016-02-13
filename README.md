@@ -6,7 +6,8 @@ The Answer Set Program (ASP) requires [downloading DLV-Prolog](http://www.dlvsys
 ## Steps
 1.  Create a file `classes.txt` that contains the taxonomic heirarchy, or use the `classes.inpho.txt` file that contains the [InPhO seed taxonomy](http://inpho.cogs.indiana.edu/taxonomy).
 2.  Create a file `evals.txt` that contains the evaluations
-3.  Run `dlv -stats -pfilter=ins,link classes.txt evals.txt program.txt 1> output.txt`
+3.  Run `dlv -pfilter=class,isa,ins,link classes.txt evals.txt program.txt 1> output.txt`
+4.  Optional: to import to the InPhO database use `python toinpho.py`
 
 ## Citation
 
