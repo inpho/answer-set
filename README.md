@@ -15,12 +15,13 @@ A loose sketch that assumes a working install of the [`inpho`](http://github.com
 2.  `git clone git@github.com:inpho/inphosite.git`
 3.  `cd inphosite`
 4.  `virtualenv sandbox --no-site-packages`
-5.  `git checkout dynamic-display`
-6.  `python setup.py develop`
-7.  Create a `development.ini` file:
+5.  `source sandbox`
+6.  `git checkout dynamic-display`
+7.  `python setup.py develop`
+8.  Create a `development.ini` file:
     1.  `cp template.ini development.ini`
     2.  Modify the `sqlalchemy.url` directive to match the one in `~/.config/inpho/inpho.ini`
-8.  `paster serve development.ini`
+9.  `paster serve development.ini`
 
 ## Citation
 
