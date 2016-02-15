@@ -15,7 +15,7 @@ A loose sketch that assumes a working install of the [`inpho`](http://github.com
 2.  `git clone git@github.com:inpho/inphosite.git`
 3.  `cd inphosite`
 4.  `virtualenv sandbox --no-site-packages`
-5.  `source sandbox`
+5.  `source sandbox/bin/activate`
 6.  `git checkout dynamic-display`
 7.  `python setup.py develop`
 8.  Create a `development.ini` file:
