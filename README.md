@@ -18,8 +18,8 @@ A loose sketch that assumes a working install of the [`inpho`](http://github.com
 5.  `git checkout dynamic-display`
 6.  `python setup.py develop`
 7.  Create a `development.ini` file:
-    a.  `cp template.ini development.ini`
-    b.  Modify the `sqlalchemy.url` directive to match the one in `~/.config/inpho/inpho.ini`
+    1.  `cp template.ini development.ini`
+    2.  Modify the `sqlalchemy.url` directive to match the one in `~/.config/inpho/inpho.ini`
 8.  `paster serve development.ini`
 
 ## Citation
