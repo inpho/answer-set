@@ -41,11 +41,24 @@ desc(X, Z) :- desc(X, Y), desc(Y, Z), class(X), class(Y), class(Z).
 % X is more specific than Y, and they are not incomparable.
 pins(X, Y) :- p4(X, Y), ms(X, Y), class(Y), not class(X), not ic(X, Y).
 pins(X, Y) :- p3(X, Y), ms(X, Y), class(Y), not class(X), not ic(X, Y).
+pins(X, Y) :- p4(X, Y), ms(X, Y), pclass(Y), not class(X), not ic(X, Y).
+pins(X, Y) :- p3(X, Y), ms(X, Y), pclass(Y), not class(X), not ic(X, Y).
+
+% POSSIBLE CLASS
+pisa(X, A) :- class(A), pins(X, A), pins(Y, A), pins(Z, A), pins(W, A), ms(X, Y), ms(X, Z), ms(X, W), not class(X).
+%    not nins(X, A), not nins(Y, A), not nins(Z, A), not nins(W, A).
+pclass(X) :- class(A), pins(X, A), pins(Y, A), pins(Z, A), pins(W, A), ms(X, Y), ms(X, Z), ms(X, W), not class(X).
+%    not nins(X, A), not nins(Y, A), not nins(Z, A), not nins(W, A).
+
+pdesc(X, Y) :- pisa(X, Y), pclass(X), class(Y).
+pdesc(X, Z) :- pdesc(X, Y), desc(Y, Z), pclass(X), class(Y), class(Z).
 
 % [NOT INS I]
 % Do not make X an instance of class Y if there is a class Z of which
 % X is possibly an instance and which is a descendant of Y.
 nins(X, Y) :- pins(X, Z), desc(Z, Y), class(Y), class(Z), not class(X).
+nins(X, Y) :- pins(X, Z), pdesc(Z, Y), class(Y), pclass(Z), not class(X).
+%nisa(X, Y) :- pisa(X, Z), desc(Z, Y), class(Y), class(Z), pclass(X), not isa(X,Y).
 
 % [NOT INS II]
 % Do not make X an instance of class Y if there is evidence for a link
@@ -56,7 +69,8 @@ nins(X, Y) :- pins(X, Z), desc(Z, Y), class(Y), class(Z), not class(X).
 % a descendant of class Y.
 %added "not nlink(Y, Z)" as test--remove if not stratified
 nins(X, Y) :- pins(X, Z), plink(Y, Z), not nlink(Y, Z),  class(Y), class(Z), not class(X).
-
+nins(X, Y) :- pins(X, Z), plink(Y, Z), not nlink(Y, Z),  class(Y), pclass(Z), not class(X).
+%nisa(X, Y) :- pins(X, Z), plink(Y, Z), not nlink(Y, Z),  class(Y), class(Z), pclass(X), not isa(X,Y).
 
 % [POSSIBLE LINK I] 
 % A link is possible from class X to class Y if these two classes are highly related
@@ -102,9 +116,15 @@ nlink(X, Y) :- desc(X, Y), class(X), class(Y).
 % Do not link from a class to one of its subclasses.
 nlink(X, Y) :- desc(Y, X), class(X), class(Y).
 
+% [CREATE ISA]
+class(X) :- pclass(X), pins(Y, X), pins(Z, X), Y != Z.
+isa(X, Y) :- pisa(X, Y), class(X), class(Y).
+
+nins(X, Y) :- isa(X, Y).
 
 % [CREATE INS]
-ins(X, Y) :- pins(X, Y), not nins(X, Y).
+ins(X, Y) :- pins(X, Y), not nins(X, Y), not class(X).
+:- ins(X, Y), isa(X, Y).
 
 % [CREATE LINK]
 link(X, Y) :- plink(X, Y), not nlink(X, Y).
