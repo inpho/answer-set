@@ -48,7 +48,8 @@ pins(X, Y) :- p3(X, Y), ms(X, Y), class(Y), not class(X), not ic(X, Y).
 % POSSIBLE CLASS
 gpclass(X) :- class(A), pins(X, A), pins(Y, A), pins(Z, A), pins(W, A), mg(X, Y), mg(X, Z), mg(X, W), Y != Z, W != Z, Y != W.
 pisa(X, A) :- class(A), pins(X, A), pins(Y, A), pins(Z, A), pins(W, A), mg(X, Y), mg(X, Z), mg(X, W), Y != Z, W != Z, Y != W.
-ains(X, Y) :- gpclass(Y), class(A), pins(X, A), pins(Y, A), ms(X,Y), not class(X), X != Y.
+ains(X, Y) :- gpclass(Y), class(A), pisa(Y, A), pins(X, A), pins(Y, A), ms(X, Y), not class(X), not gpclass(X), X != Y.
+%nins(X, Y) :- ains(X, Y), ains(Y, X), X != Y.
 spclass(X) :- class(A), pins(X, A), pins(Y, A), pins(Z, A), pins(W, A), ms(X, Y), ms(X, Z), ms(X, W), Y != Z, W != Z, Y != W.
 %pisa(X, A) :- class(A), pins(X, A), pins(Y, A), pins(Z, A), pins(W, A), ms(X, Y), ms(X, Z), ms(X, W), Y != Z, W != Z, Y != W.
 pclass(X) :- pisa(X, A).
@@ -67,6 +68,7 @@ pdesc(X, Z) :- pdesc(X, Y), pdesc(Y, Z), pclass(X), class(Y), class(Z).
 % Do not make X an instance of class Y if there is a class Z of which
 % X is possibly an instance and which is a descendant of Y.
 nins(X, Y) :- pins(X, Z), desc(Z, Y), class(Y), class(Z), not class(X).
+nins(X, Y) :- ains(X, Z), pdesc(Z, Y), not class(X). %, class(Y), class(Z), not class(X).
 %nins(X, Y) :- pins(X, Z), pdesc(Z, Y), class(Y), pclass(Z), not class(X).
 nisa(X, Y) :- pisa(X, Z), pdesc(Z, Y), pclass(X).
 
@@ -127,13 +129,20 @@ nlink(X, Y) :- desc(X, Y), class(X), class(Y).
 nlink(X, Y) :- desc(Y, X), class(X), class(Y).
 
 % [CREATE ISA]
-aclass(X) :- pclass(X), pins(Y, X), pins(Z, X), Y != Z.
-isa(X, Y) :- pisa(X, Y), not nisa(X, Y).
-nins(X, Y) :- isa(X, Y).
+%aclass(X) :- pclass(X), pins(Y, X), pins(Z, X), Y != Z.
+%nins(X, Y) :- isa(X, Y).
 
 
 % [CREATE INS]
-ins(X, Y) :- pins(X, Y), not nins(X, Y), not class(X).
+%nins(X, Z) :- ains(X, Y), pins(X, Z), class(Z), Y != Z.
+nins(X, Y) :- pisa(X, Y), not nisa(X, Y), gpclass(X), class(Y).
+ins(X, Y) :- ains(X, Y), not ains(Y, X), not pins(X, Y), not nins(X, Y), not pisa(X, Y), gpclass(Y), not class(X), not gpclass(X).
+isb(X, Y) :- pisa(X, Y), not nisa(X, Y), gpclass(X), class(Y).
+ins(X, Y) :- pins(X, Y), not nins(X, Y), not isb(X, Y), not class(X), not gpclass(X), class(Y).
+isb(X, Y) :- isa(X, Y).
+aclass(X) :- isb(X, Y).
+aclass(Y) :- isb(X, Y).
+aclass(X) :- class(X).
 
 % [CREATE LINK]
 link(X, Y) :- plink(X, Y), not nlink(X, Y).
