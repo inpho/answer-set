@@ -4,6 +4,60 @@
 % The "output" predicates are: ins and link.
 % The "auxiliary" predicates are: desc, ms', mg', ic', pi', pins, plink, nins, nlink.
 
+%Cameron added ratings on 7/24/08--make sure to put "rating" predicate in body so it doesn't ground to all ideas!
+%stratified input predicates are named same as unstratified counterparts but with "i" suffix
+rating(0).
+rating(1).
+rating(2).
+rating(3).
+rating(4).
+
+%process expert-level-stratified input versions of predicates into those used by program
+%inverse
+msi(X, Y, A) :- mgi(Y, X, A), rating(A).
+mgi(X, Y, A) :- msi(Y, X, A), rating(A).
+
+%similarity symmetry
+p4i(X, Y, A) :- p4i(Y, X, A), rating(A).
+p3i(X, Y, A) :- p3i(Y, X, A), rating(A).
+p1i(X, Y, A) :- p1i(Y, X, A), rating(A).
+p0i(X, Y, A) :- p0i(Y, X, A), rating(A).
+
+%incomparable symmetry
+ici(X, Y, A) :- ici(Y, X, A), rating(A).
+
+%evidence against similarity ratings if contradicted by those at a higher level
+np4(X, Y, A) :- p4i(X, Y, A), p0i(X, Y, B), B>A, rating(A), rating(B).
+np4(X, Y, A) :- p4i(X, Y, A), p1i(X, Y, B), B>A, rating(A), rating(B).
+np3(X, Y, A) :- p3i(X, Y, A), p0i(X, Y, B), B>A, rating(A), rating(B).
+np3(X, Y, A) :- p3i(X, Y, A), p1i(X, Y, B), B>A, rating(A), rating(B).
+
+%if no evidence against the similarity at that level, allow to pass through the "filter"
+p4(X, Y) :- p4i(X, Y, A), not np4(X, Y, A), rating(A).
+p3(X, Y) :- p3i(X, Y, A), not np3(X, Y, A), rating(A).
+
+%allow lower-level generality evaluations to pass through if not contradicted by a higher level
+%mg(X, Y) :- mgi(X, Y, A), rating(A), rating(B), not msi(X, Y, B), B>A.
+%ms(X, Y) :- msi(X, Y, A), rating(A), rating(B), not msi(X, Y, B), B>A.
+
+%evidence against the generality ratings at one level if contradicted by those at a higher level
+nmg(X, Y, A) :- mgi(X, Y, A), msi(X, Y, B), B>A, rating(A), rating(B).
+nms(X, Y, A) :- msi (X, Y, A), mgi(X, Y, B), B>A, rating(A), rating(B).
+
+%if no evidence against the generality at that level, allow to pass through the "filter"
+mg(X, Y) :- mgi(X, Y, A), not nmg(X, Y, A), rating(A).
+ms(X, Y) :- msi(X, Y, A), not nms(X, Y, A), rating(A).
+
+%allow inconsistencies to pass through if not contradicted by generality ratings at higher level
+%the following rule is not right
+%ic(X, Y) :- ici(X, Y, A), rating(A), rating(B), rating(C), not mgi(X, Y, B), not msi(X, Y, C), B>A, C>A. 
+
+nic(X, Y, A) :- ici(X, Y, A), mgi(X, Y, B), B>A, rating(A), rating(B).
+nic(X, Y, A) :- ici(X, Y, A), msi(X, Y, B), B>A, rating(A), rating(B).
+
+%if no evidence against inconsistency, allow it to pass through the filter 
+ic(X, Y) :- ici(X, Y, A), not nic(X, Y, A), rating(A).
+
 % mg is the inverse of ms, and vice versa
 mg(X, Y) :- ms(Y, X).
 ms(X, Y) :- mg(Y, X).
