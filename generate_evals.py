@@ -52,16 +52,16 @@ def print_evaluations(type=IdeaEvaluation):
         # Print the generality relation
         if eval.generality == 0:
             # more specific
-            print "ms(i%s, i%s)." % (eval.ante_id, eval.cons_id)
+            print "msi(i%s, i%s, %s)." % (eval.ante_id, eval.cons_id, max(eval.user.first_area_level, eval.user.second_area_level))
         elif eval.generality == 1:
             # more general
-            print "mg(i%s, i%s)." % (eval.ante_id, eval.cons_id)
+            print "mgi(i%s, i%s, %s)." % (eval.ante_id, eval.cons_id, max(eval.user.first_area_level, eval.user.second_area_level))
         elif eval.generality == 2:
             # same generality
-            print "sg(i%s, i%s)." % (eval.ante_id, eval.cons_id)
+            print "sgi(i%s, i%s, %s)." % (eval.ante_id, eval.cons_id, max(eval.user.first_area_level, eval.user.second_area_level))
         elif eval.generality == 3:
             # inconsistent/incompatible
-            print "ic(i%s, i%s)." % (eval.ante_id, eval.cons_id)
+            print "ici(i%s, i%s, %s)." % (eval.ante_id, eval.cons_id, max(eval.user.first_area_level, eval.user.second_area_level))
 
     return appearances
 
