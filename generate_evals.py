@@ -36,32 +36,34 @@ def print_taxonomy():
 
 def print_evaluations(type=IdeaEvaluation):
     """
-    Prints DLV atoms for evaluations, covering the p#, mg, ms, sg, and ic.
+    Prints DLV atoms for evaluations, covering the p#, mgi, msi, sgi, and ici.
     Returns the list of terms which occur in the database.
     """
     appearances = set()
+    
+    ic = defaultdict(lambda: [0,0,0,0,0])
+    mg = defaultdict(lambda: [0,0,0,0,0])
+    ms = defaultdict(lambda: [0,0,0,0,0])
 
-    evals = Session.query(type).all()
+    evals = Session.query(IdeaEvaluation).all()
+    
     for eval in evals:
         appearances.update([eval.ante_id, eval.cons_id])
-    
-        # print the relatedness
-        if eval.relatedness >= 0:
-            print "p%s(i%s, i%s)." % (eval.relatedness, eval.ante_id, eval.cons_id)
-    
-        # Print the generality relation
+        
+        if not eval.user:
+            continue
+        
+        expertise_level = max(eval.user.first_area_level, eval.user.second_area_level)
+        
+        if not expertise_level:
+            expertise_level = 0
+        
         if eval.generality == 0:
-            # more specific
-            print "msi(i%s, i%s, %s)." % (eval.ante_id, eval.cons_id, max(eval.user.first_area_level, eval.user.second_area_level))
-        elif eval.generality == 1:
-            # more general
-            print "mgi(i%s, i%s, %s)." % (eval.ante_id, eval.cons_id, max(eval.user.first_area_level, eval.user.second_area_level))
-        elif eval.generality == 2:
-            # same generality
-            print "sgi(i%s, i%s, %s)." % (eval.ante_id, eval.cons_id, max(eval.user.first_area_level, eval.user.second_area_level))
-        elif eval.generality == 3:
-            # inconsistent/incompatible
-            print "ici(i%s, i%s, %s)." % (eval.ante_id, eval.cons_id, max(eval.user.first_area_level, eval.user.second_area_level))
+            ms[(eval.ante_id, eval.cons_id)][expertise_level] += 1
+        if eval.generality == 1:
+            mg[(eval.ante_id, eval.cons_id)][expertise_level] += 1
+        if eval.generality == 3:
+            ic[(eval.ante_id, eval.cons_id)][expertise_level] += 1
 
     return appearances
 
