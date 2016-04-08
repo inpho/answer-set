@@ -65,6 +65,23 @@ def print_evaluations(type=IdeaEvaluation):
         if eval.generality == 3:
             ic[(eval.ante_id, eval.cons_id)][expertise_level] += 1
 
+    for (topic1, topic2) in ic.keys():
+        for i in range(4):
+            #1. if msi > mgi and msi > ici --> msi
+            if ms[(topic1,topic2)][i] > mg[(topic1,topic2)][i] and ms[(topic1,topic2)][i] > ic[(topic1,topic2)][i]:
+                print "msi(i%s, i%s, %s)." % (topic1, topic2, i)
+            #2. if mgi > msi and mgi > ici --> mgi
+            if mg[(topic1,topic2)][i] > ms[(topic1,topic2)][i] and mg[(topic1,topic2)][i] > ic[(topic1,topic2)][i]:
+                print "mgi(i%s, i%s, %s)." % (topic1, topic2, i)
+            #3. if ici > msi and ici > mgi --> ici
+            if ic[(topic1,topic2)][i] > ms[(topic1,topic2)][i] and ic[(topic1,topic2)][i] > mg[(topic1,topic2)][i]:
+                print "ici(i%s, i%s, %s)." % (topic1, topic2, i)
+            #1. msi case 1: bias against IC in input; where ICI(A, B, C) = MSI(A, B, C), but MSI(A, B, C) > MGI(A, B, C) choose MSI.
+            if ic[(topic1,topic2)][i] == ms[(topic1,topic2)][i] and ms[(topic1,topic2)][i] > mg[(topic1,topic2)][i]:
+                print "msi(i%s, i%s, %s)." % (topic1, topic2, i)
+            #2. mgi case 2: bias against IC in input; where ICI(A, B, C) = MGI(A, B, C), but MGI(A, B, C) > MSI(A, B, C) choose MGI
+            if ic[(topic1,topic2)][i] == mg[(topic1,topic2)][i] and mg[(topic1,topic2)][i] > ms[(topic1,topic2)][i]:
+                print "mgi(i%s, i%s, %s)." % (topic1, topic2, i)
     return appearances
 
 def print_appearances(appearances):
