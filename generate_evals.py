@@ -1,6 +1,6 @@
 from inpho.model import *
-
 from sqlalchemy import or_
+from collections import defaultdict
 
 def generate_input():
     """
@@ -64,6 +64,10 @@ def print_evaluations(type=IdeaEvaluation):
             mg[(eval.ante_id, eval.cons_id)][expertise_level] += 1
         if eval.generality == 3:
             ic[(eval.ante_id, eval.cons_id)][expertise_level] += 1
+        
+        # print the relatedness
+        if eval.relatedness >= 0:
+            print "p%si(i%s, i%s, %s)." % (eval.relatedness, eval.ante_id, eval.cons_id, expertise_level)
 
     for (topic1, topic2) in ic.keys():
         for i in range(4):
@@ -82,6 +86,7 @@ def print_evaluations(type=IdeaEvaluation):
             #2. mgi case 2: bias against IC in input; where ICI(A, B, C) = MGI(A, B, C), but MGI(A, B, C) > MSI(A, B, C) choose MGI
             if ic[(topic1,topic2)][i] == mg[(topic1,topic2)][i] and mg[(topic1,topic2)][i] > ms[(topic1,topic2)][i]:
                 print "mgi(i%s, i%s, %s)." % (topic1, topic2, i)
+     
     return appearances
 
 def print_appearances(appearances):
